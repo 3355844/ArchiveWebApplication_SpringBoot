@@ -1,5 +1,8 @@
-package ArchiveWebApplication;
+package ArchiveWebApplication.controller;
 
+import ArchiveWebApplication.model.ArchiveNotFoundException;
+import ArchiveWebApplication.service.ArchiveService;
+import ArchiveWebApplication.model.Box;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,7 +28,7 @@ public class ArchiveController {
     @Autowired
     ArchiveService service;
 
-    @RequestMapping("/*")
+    @RequestMapping("/box/*")
     public String index(Model model) {
         return "index";
     }

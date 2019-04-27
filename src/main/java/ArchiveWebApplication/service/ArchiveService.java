@@ -1,10 +1,7 @@
-package ArchiveWebApplication;
+package ArchiveWebApplication.service;
 
+import ArchiveWebApplication.model.Box;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,14 +26,14 @@ public class ArchiveService {
         return tmpBox;
     }
 
-
+    @Transactional
     public String getBoxName(long id) {
         return archiver.getBoxById(id).getName();
     }
 
     @Transactional
     public void deleteBox(long id) {
-         archiver.delete(id);
+        archiver.delete(id);
     }
 
     @Transactional(readOnly = true)
@@ -57,7 +54,7 @@ public class ArchiveService {
             array = file.getBytes();
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ZipOutputStream zos = new ZipOutputStream(bos);
-            ZipEntry ze = new ZipEntry(file.getOriginalFilename());
+            ZipEntry ze = new ZipEntry( file.getOriginalFilename());
             ze.setSize(array.length);
             zos.putNextEntry(ze);
             zos.write(array);

@@ -1,4 +1,4 @@
-package ArchiveWebApplication;
+package ArchiveWebApplication.model;
 
 import org.hibernate.exception.DataException;
 
