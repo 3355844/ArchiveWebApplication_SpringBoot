@@ -12,7 +12,7 @@ public interface IBeer extends JpaRepository<Beer, Long> {
     @Query("SELECT b FROM Beer b")
     List<Beer> getAllBeer();
 
-    @Query("UPDATE Beer b set b.name = :name, b.alcoholPercent = : alcoholPercent where b.id = :id")
+    @Query("UPDATE Beer b set b.name = :name, b.alcoholPercent = :alcoholPercent where b.id = :id") // delete space from query
     void updateBeer(@Param("name") String name,
                     @Param("alcoholPercent") double alcoholPercent,
                     @Param("id") long id);

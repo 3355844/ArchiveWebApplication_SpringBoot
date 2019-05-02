@@ -33,7 +33,7 @@ public class ArchiveController {
         return "index";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/box/add", method = RequestMethod.POST)
     public String add(@RequestParam(value = "file") MultipartFile file, Model model) throws IOException {
         if (!file.isEmpty()) {
             Box box = new Box();
@@ -48,13 +48,13 @@ public class ArchiveController {
         }
     }
 
-    @RequestMapping ("/dell/{boxId}")
+    @RequestMapping ("/box/dell/{boxId}")
     public String dellArchive(@PathVariable("boxId") long id, Model model){
         service.deleteBox(id);
         return toAll(model);
     }
 
-    @RequestMapping("/download/{boxId}")
+    @RequestMapping("/box/download/{boxId}")
     public ResponseEntity<byte[]> downloadArchive(@PathVariable("boxId") long id) {
         System.out.println("Come to method download archive with id: " + id);
         byte[] archive = service.archiveById(id);
@@ -67,7 +67,7 @@ public class ArchiveController {
         return new ResponseEntity<byte[]>(archive, headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/all")
+    @RequestMapping(value = "/box/all")
     public String toAll(Model model) {
         List<Box> boxList;
         boxList = service.findAll();
@@ -75,6 +75,6 @@ public class ArchiveController {
             System.out.println(box1.toString());
         }
         model.addAttribute("list", boxList);
-        return "all";
+        return "/box/all";
     }
 }

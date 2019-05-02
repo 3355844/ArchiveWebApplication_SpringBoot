@@ -17,7 +17,7 @@ public class BeerController {
     @Autowired
     BeerService service;
 
-    @RequestMapping(value = "/beer", method = RequestMethod.GET)
+    @RequestMapping(value = "/beer/*", method = RequestMethod.GET)
     public String beer(Model model) {
         List<Beer> beerList = service.findAll();
         for (Beer beer : beerList) {
@@ -28,7 +28,7 @@ public class BeerController {
     }
 
 
-    @RequestMapping(value = "/beer", method = RequestMethod.POST)
+    @RequestMapping(value = "/beer/", method = RequestMethod.POST)
     public String addBeer(@RequestParam(value = "name") String name,
                           @RequestParam(value = "alcoholPercent") double alcoholPercent,
                           Model model) {
@@ -54,7 +54,7 @@ public class BeerController {
 
     public String updateBeer(@PathVariable("beerId") long id, Model model){
 
-        service.updateBeer(id);
+//        service.updateBeer(id);
         return beer(model);
     }
 
