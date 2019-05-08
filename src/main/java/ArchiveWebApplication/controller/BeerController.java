@@ -17,7 +17,7 @@ public class BeerController {
     @Autowired
     BeerService service;
 
-    @RequestMapping(value = "/beer/*", method = RequestMethod.GET)
+    @RequestMapping(value = "/beer", method = RequestMethod.GET)
     public String beer(Model model) {
         List<Beer> beerList = service.findAll();
         for (Beer beer : beerList) {
@@ -28,11 +28,14 @@ public class BeerController {
     }
 
 
-    @RequestMapping(value = "/beer/", method = RequestMethod.POST)
+    @RequestMapping(value = "/beer", method = RequestMethod.POST)
     public String addBeer(@RequestParam(value = "name") String name,
                           @RequestParam(value = "alcoholPercent") double alcoholPercent,
                           Model model) {
+
+        System.out.println("beer POST method...");
         if (!name.isEmpty()) {
+            System.out.println("Beer is not empty");
             Beer beer = new Beer();
             beer.setName(name);
             beer.setAlcoholPercent(alcoholPercent);
@@ -40,21 +43,30 @@ public class BeerController {
             return beer(model);
 
         } else {
+            System.out.println("NO BEER!");
             model.addAttribute("mess", "No beer !!!");
             return "beer";
         }
     }
 
     @RequestMapping(value = "/beer", method = RequestMethod.DELETE)
-    public  String deleteBeer(@PathVariable("beerId") long id, Model model){
+    public String deleteBeer(@PathVariable("beerId") long id, Model model) {
         service.deleteBeer(id);
         return beer(model);
     }
 
+    @RequestMapping(value = "/beer", method = RequestMethod.PUT)
+    public String updateBeer(@PathVariable("beerId") long id,
+                             @PathVariable("name") String name,
+                             @PathVariable("alcoholPercent") double alcoholPercent,
+                             Model model) {
 
-    public String updateBeer(@PathVariable("beerId") long id, Model model){
+        Beer beer = new Beer();
+        beer.setId(id);
+        beer.setName(name);
+        beer.setAlcoholPercent(alcoholPercent);
 
-//        service.updateBeer(id);
+        service.updateBeer(beer);
         return beer(model);
     }
 

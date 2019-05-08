@@ -17,7 +17,7 @@
     <h3><img height="40" src="<c:url value="/static/google sites-icon-large.png"/>">
     </h3>
     <p align="center"><a href="/all">Archive Files</a></p>
-</div>
+</div >
 <div align="center">${mess}</div>
 <div align="center">
     <form action="/add" name="form" method="post" enctype="multipart/form-data">
@@ -26,6 +26,9 @@
         <br/>
         <input type="image" src="/static/to_box.png" name="submit" id="submit"/>
     </form>
+</div>
+<div>
+    <a href="/beer">To beer Page</a>
 </div>
 </body>
 </html>

@@ -41,6 +41,9 @@
             </tbody>
         </c:forEach>
     </table>
+
+    <br>
+    <a href="/beer">To beer Page</a>
 </div>
 </body>
 </html>
